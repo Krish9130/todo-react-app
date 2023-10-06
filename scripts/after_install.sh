@@ -2,7 +2,5 @@
 
 # navigate to app folder
 cd /app
-
-cp -r build/* /var/www/html
-
-service nginx reload
+npm install pm2@latest -g
+pm2 start npm --name "todo-react-app" -- start
