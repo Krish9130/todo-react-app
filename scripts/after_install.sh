@@ -1,6 +1,6 @@
 #!/bin/bash
 
 # navigate to app folder
-cd /app
+cd /opt/build
 npm install pm2@latest -g
-pm2 start npm --name "todo-react-app" -- start
+pm2 start npm --name "build" -- start
