@@ -13,7 +13,7 @@ phases:
        
   build:
     commands:
-        - npm run build
+
         - pwd
         - ls -al
          # copy the secret value in .env file
