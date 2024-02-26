@@ -7,14 +7,3 @@ files:
     destination: /opt
     overwrite: true
 
-permissions:
-  - object: /
-    pattern: "**"
-    owner: ubuntu
-    group: ubuntu
-
-hooks:
-  AfterInstall:
-    - location: scripts/after_install.sh
-      timeout: 300
-      runas: root
