@@ -1,5 +1,8 @@
 version: 0.2
-
+env:
+  secrets-manager:
+    SECRET_VALUE: "arn:aws:secretsmanager:us-east-1:358326491230:secret:vikas.env-s03Rwx"
+    
 phases:
   install:
     runtime-versions:
@@ -13,6 +16,8 @@ phases:
         - npm run build
         - pwd
         - ls -al
+         # copy the secret value in .env file
+        - echo $SECRET_VALUE >>${CODEBUILD_SRC_DIR}/.env
 artifacts:
   files:
     - public/**/*
