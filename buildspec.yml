@@ -4,19 +4,15 @@ env:
     SECRET_VALUE: "arn:aws:secretsmanager:us-east-1:358326491230:secret:vikas.env-s03Rwx"
     
 phases:
-  install:
-    runtime-versions:
-      nodejs: 14
-   
-       
+
   build:
     commands:
-
         - pwd
         - ls -al
          # copy the secret value in .env file
-        - cat $CODEBUILD_SRC_DIR
+        - echo $CODEBUILD_SRC_DIR
         - echo $SECRET_VALUE >>${CODEBUILD_SRC_DIR}/.env
+        - ls -al
 artifacts:
   files:
     - public/**/*
