@@ -13,6 +13,7 @@ phases:
         - echo $CODEBUILD_SRC_DIR
         - echo $SECRET_VALUE >>${CODEBUILD_SRC_DIR}/.env
         - ls -al
+        - cat .env
 artifacts:
   files:
     - public/**/*
