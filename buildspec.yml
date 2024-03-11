@@ -5,16 +5,19 @@ env:
     
 phases:
 
-  build:
-    commands:
-        - pwd
-        - ls -al
-         # copy the secret value in .env file
-        - echo $CODEBUILD_SRC_DIR
-        - echo $SECRET_VALUE >>${CODEBUILD_SRC_DIR}/.env
-        - ls -al
-        - cat .env
-        - ls
+build:
+  commands:
+    - if [ "$CODEBUILD_SOURCE_REPO_URL" == "https://github.com/vikaskumarp1061/todo-react-app.git" ]; then
+        pwd
+        ls -al
+        # Copy the secret value into .env file
+        echo $CODEBUILD_SRC_DIR
+        echo $SECRET_VALUE >> ${CODEBUILD_SRC_DIR}/.env
+        ls -al
+        cat ${CODEBUILD_SRC_DIR}/.env
+        ls
+      fi
+
 
 artifacts:
   files:
