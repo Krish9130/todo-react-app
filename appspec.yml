@@ -4,6 +4,6 @@ os: linux
 
 files:
   - source: /
-    destination: /opt/test
+    destination: /opt/tet
     overwrite: true
 
