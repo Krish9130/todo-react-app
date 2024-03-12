@@ -4,20 +4,18 @@ env:
     SECRET_VALUE: "arn:aws:secretsmanager:us-east-1:358326491230:secret:vikas.env-s03Rwx"
     
 phases:
-
-build:
-  commands:
-    - if [ "$CODEBUILD_SOURCE_REPO_URL" == "https://github.com/vikaskumarp1061/todo-react-app.git" ]; then
-        pwd
-        ls -al
-        # Copy the secret value into .env file
-        echo $CODEBUILD_SRC_DIR
-        echo $SECRET_VALUE >> ${CODEBUILD_SRC_DIR}/.env
-        ls -al
-        cat ${CODEBUILD_SRC_DIR}/.env
-        ls
-      fi
-
+  build:
+    commands:
+      - if [ "$CODEBUILD_SOURCE_REPO_URL" == "https://github.com/vikaskumarp1061/todo-react-app.git" ]; then
+          pwd
+          ls -al
+          # Copy the secret value into .env file
+          echo $CODEBUILD_SRC_DIR
+          echo $SECRET_VALUE >> ${CODEBUILD_SRC_DIR}/.env
+          ls -al
+          cat ${CODEBUILD_SRC_DIR}/.env
+          ls
+        fi
 
 artifacts:
   files:
