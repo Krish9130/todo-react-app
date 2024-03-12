@@ -7,7 +7,7 @@ phases:
   build:
     commands:
       - |
-        if [ "$CODEBUILD_SOURCE_REPO_URL" == "https://github.com/vikaskumarp1061/todo-react-app.git" ]; then
+        if [ "$CODEBUILD_SOURCE_REPO_URL" = "https://github.com/vikaskumarp1061/todo-react-app.git" ]; then
           pwd
           ls -al
           # Copy the secret value into .env file
