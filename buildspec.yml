@@ -7,6 +7,7 @@ phases:
   build:
     commands:
       - echo $CODEBUILD_SRC_DIR
+      - ls -al
       - |
         #!/bin/bash
         if [ "$CODEBUILD_SOURCE_REPO_URL" = "https://github.com/vikaskumarp1061/todo-react-app.git" ]; then
