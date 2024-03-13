@@ -20,7 +20,7 @@ phases:
         # Switch to Node.js version for Angular
         nvm install $NODE_VERSION_ANGULAR
         nvm use $NODE_VERSION_ANGULAR
-      fi
+        fi
       # Install dependencies
       npm install
 
