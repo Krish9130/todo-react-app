@@ -8,15 +8,18 @@ env:
     
 phases:
   install:
-    commands: |-
-      if [ "$APPLICATION_TYPE" = "react" ]; then
-      nvm install $NODE_VERSION_REACT
-      nvm use $NODE_VERSION_REACT
-      node -v
-      elif [ "$APPLICATION_TYPE" = "angular" ]; then
+    commands:
+      - aws ecr list-ima
+      - |
+        if [ "$APPLICATION_TYPE" = "react" ]; then
+        # Switch to Node.js version for React
+        nvm install $NODE_VERSION_REACT
+        nvm use $NODE_VERSION_REACT
+        node -v
+        elif [ "$APPLICATION_TYPE" = "angular" ]; then
         # Switch to Node.js version for Angular
-      nvm install $NODE_VERSION_ANGULAR
-      nvm use $NODE_VERSION_ANGULAR
+        nvm install $NODE_VERSION_ANGULAR
+        nvm use $NODE_VERSION_ANGULAR
       fi
       # Install dependencies
       npm install
