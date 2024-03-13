@@ -23,6 +23,7 @@ phases:
       - ls -al
       - mv build todo
       - ls -al todo
+      - ls -al
 
 
 
