@@ -16,9 +16,15 @@ phases:
       - echo $CODEBUILD_SRC_DIR_angular
       - pwd
       - ls -al
+      # Move to React folder
       - cd $CODEBUILD_SRC_DIR
       - ls -al
       - npm run build
+      - ls -al
+
+
+
+
       
       - cd $CODEBUILD_SRC_DIR_angular
       - ls -al
