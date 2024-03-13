@@ -1,5 +1,5 @@
 #!/bin/bash
-cd /opt/build/
+cd /opt/tet/todo/
 cp -r * /var/www/html
 cd /var/www/html
 #mv index.nginx-debian.html ../
