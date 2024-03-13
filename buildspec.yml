@@ -29,7 +29,7 @@ phases:
       #Build angular app      
       - cd $CODEBUILD_SRC_DIR_angular
       - ls -al
-      - npm run build
+      - ng build
       - mv dist angular
       - ls -al angular
       
