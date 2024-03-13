@@ -14,11 +14,11 @@ phases:
           nvm install $NODE_VERSION_REACT
           nvm use $NODE_VERSION_REACT
           
-      elif [ "$APPLICATION_TYPE" = "angular" ]; then
+        elif [ "$APPLICATION_TYPE" = "angular" ]; then
           # Switch to Node.js version for Angular
           nvm install $NODE_VERSION_ANGULAR
           nvm use $NODE_VERSION_ANGULAR
-      fi
+        fi
       
       # Install dependencies
       - npm install
@@ -39,12 +39,12 @@ phases:
           ls -al
           mv build todo
           
-      elif [ "$APPLICATION_TYPE" = "angular" ]; then
+        elif [ "$APPLICATION_TYPE" = "angular" ]; then
           echo "Building Angular application..."
           cd $CODEBUILD_SRC_DIR_angular
           ng build
           mv dist angular
-      fi
+        fi
       
 
       
