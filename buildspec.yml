@@ -9,7 +9,6 @@ env:
 phases:
   install:
     commands:
-      - aws ecr list-ima
       - |
         if [ "$APPLICATION_TYPE" = "react" ]; then
         # Switch to Node.js version for React
