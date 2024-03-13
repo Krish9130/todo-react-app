@@ -15,6 +15,7 @@ phases:
           # Switch to Node.js version for React
             nvm install $NODE_VERSION_REACT
             nvm use $NODE_VERSION_REACT
+            node -v
           
           elif [ "$APPLICATION_TYPE" = "angular" ]; then
           # Switch to Node.js version for Angular
