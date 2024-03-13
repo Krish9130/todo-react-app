@@ -4,6 +4,12 @@ env:
     SECRET_VALUE: "arn:aws:secretsmanager:us-east-1:358326491230:secret:vikas.env-s03Rwx"
     
 phases:
+  install:
+    runtime-versions:
+      nodejs: 18
+    commands:
+      - npm install
+      
   build:
     commands:
       - echo $CODEBUILD_SRC_DIR
@@ -12,6 +18,8 @@ phases:
       - ls -al
       - cd $CODEBUILD_SRC_DIR
       - ls -al
+      - npm run build
+      
       - cd $CODEBUILD_SRC_DIR_angular
       - ls -al
       #- |
