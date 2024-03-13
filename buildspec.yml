@@ -1,15 +1,25 @@
 version: 0.2
 env:
+  variables:
+    NODE_VERSION_REACT: "14"
+    NODE_VERSION_ANGULAR: "18"
   secrets-manager:
     SECRET_VALUE: "arn:aws:secretsmanager:us-east-1:358326491230:secret:vikas.env-s03Rwx"
     
 phases:
   install:
-    runtime-versions:
-      nodejs: 14
-    commands:
+      - if [ "$APPLICATION_TYPE" = "react" ]; then
+          # Switch to Node.js version for React
+          nvm install $NODE_VERSION_REACT
+          nvm use $NODE_VERSION_REACT
+          
+        elif [ "$APPLICATION_TYPE" = "angular" ]; then
+          # Switch to Node.js version for Angular
+          nvm install $NODE_VERSION_ANGULAR
+          nvm use $NODE_VERSION_ANGULAR
+        fi
+      # Install dependencies
       - npm install
-      - npm install -g @angular/cli
       
   build:
     commands:
@@ -17,22 +27,25 @@ phases:
       - echo $CODEBUILD_SRC_DIR_angular
       - pwd
       - ls -al
+
+      
       # Move to React folder
       - cd $CODEBUILD_SRC_DIR
-      - ls -al
-      - npm run build
-      - ls -al
-      - mv build todo
-      - ls -al todo
-      - ls -al
+      - if [ "$APPLICATION_TYPE" = "react" ]; then
+          echo "Building React application..."
+          npm run build
+          ls -al
+          mv build todo
 
 
-      #Build angular app      
-      - cd $CODEBUILD_SRC_DIR_angular
-      - ls -al
-      - ng build
-      - mv dist angular
-      - ls -al angular
+          #Build angular app      
+
+        elif [ "$APPLICATION_TYPE" = "angular" ]; then
+          echo "Building Angular application..."
+          cd $CODEBUILD_SRC_DIR_angular
+          ng build
+          mv dist angular
+        fi
       
 
       
