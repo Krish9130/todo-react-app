@@ -29,7 +29,12 @@ phases:
       #Build angular app      
       - cd $CODEBUILD_SRC_DIR_angular
       - ls -al
+      - npm run build
+      - mv dist angular
+      - ls -al angular
+      
 
+      
       #  #!/bin/bash
       #  if [ "$CODEBUILD_SOURCE_REPO_URL" = "https://github.com/vikaskumarp1061/todo-react-app.git" ]; then
       #    pwd
@@ -45,8 +50,7 @@ phases:
 artifacts:
   files:
     - todo/**/*
-
+    - angular/**/*
     - appspec.yml
     - scripts/**/*
-    - build/**/*
     - .env
