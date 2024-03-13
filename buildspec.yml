@@ -21,6 +21,8 @@ phases:
       - ls -al
       - npm run build
       - ls -al
+      - mv build todo
+      - ls -al todo
 
 
 
