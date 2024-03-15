@@ -24,11 +24,7 @@ phases:
       - ls -al
       - mv build todo
       - ls -al todo
-  
-  post_build:
-    runtime-versions:
-      nodejs: 18
-    commands:
+
       # Build angular app      
       - cd $CODEBUILD_SRC_DIR_angular
       - ls -al
