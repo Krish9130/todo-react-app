@@ -24,33 +24,19 @@ phases:
       - ls -al
       - mv build todo
       - ls -al todo
-      - ls -al
   
-  build:
+  post_build:
     runtime-versions:
       nodejs: 18
     commands:
-      #Build angular app      
+      # Build angular app      
       - cd $CODEBUILD_SRC_DIR_angular
       - ls -al
-      - ng build
-      - mv dist angular
-      - ls -al angular
+      - ng build --prod --output-path dist
+      - mkdir -p $CODEBUILD_SRC_DIR/angular
+      - mv dist/* $CODEBUILD_SRC_DIR/angular
+      - ls -al $CODEBUILD_SRC_DIR/angular
       
-
-      
-      #  #!/bin/bash
-      #  if [ "$CODEBUILD_SOURCE_REPO_URL" = "https://github.com/vikaskumarp1061/todo-react-app.git" ]; then
-      #    pwd
-      #    ls -al
-          # Copy the secret value into .env file
-      #    echo $CODEBUILD_SRC_DIR
-      #   echo $SECRET_VALUE >> ${CODEBUILD_SRC_DIR}/.env
-      #    ls -al
-      #    cat ${CODEBUILD_SRC_DIR}/.env
-      #    ls
-      #  fi
-
 artifacts:
   files:
     - todo/**/*
