@@ -1,4 +1,4 @@
-  version: 0.2
+version: 0.2
 env:
   secrets-manager:
     SECRET_VALUE: "arn:aws:secretsmanager:us-east-1:358326491230:secret:vikas.env-s03Rwx"
