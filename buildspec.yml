@@ -1,7 +1,7 @@
 version: 0.2
-env:
-  secrets-manager:
-    SECRET_VALUE: "arn:aws:secretsmanager:us-east-1:358326491230:secret:vikas.env-s03Rwx"
+#env:
+#  secrets-manager:
+#    SECRET_VALUE: "arn:aws:secretsmanager:us-east-1:358326491230:secret:vikas.env-s03Rwx"
     
 phases:
   install:
@@ -9,7 +9,6 @@ phases:
       nodejs: 14
     commands:
       - npm install
-      - npm install -g @angular/cli
       
   build:
     commands:
@@ -39,4 +38,4 @@ artifacts:
     - angular/**/*
     - appspec.yml
     - scripts/**/*
-    - .env
+  #  - .env
