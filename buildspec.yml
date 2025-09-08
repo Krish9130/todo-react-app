@@ -2,8 +2,8 @@ version: 0.2
 
 env:
   secrets-manager:
-    ECR_USERNAME: ecr-credentials:username
-    ECR_PASSWORD: ecr-credentials:password
+    ECR_USERNAME: ecr-credential:username
+    ECR_PASSWORD: ecr-credential:password
 
 phases:
   pre_build:
