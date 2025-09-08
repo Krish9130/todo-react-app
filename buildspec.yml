@@ -1,41 +1,24 @@
 version: 0.2
-#env:
-#  secrets-manager:
-#    SECRET_VALUE: "arn:aws:secretsmanager:us-east-1:358326491230:secret:vikas.env-s03Rwx"
-    
+
+env:
+  secrets-manager:
+    ECR_USERNAME: ecr-credentials:username
+    ECR_PASSWORD: ecr-credentials:password
+
 phases:
-  install:
-    runtime-versions:
-      nodejs: 18
+  pre_build:
     commands:
-      - npm install
-      
+      - echo "Logging into ECR..."
+      - echo $ECR_PASSWORD | docker login -u $ECR_USERNAME --password-stdin 615299762705.dkr.ecr.ap-south-1.amazonaws.com > /dev/null 2>&1
   build:
     commands:
-      - echo $CODEBUILD_SRC_DIR
-      - echo $CODEBUILD_SRC_DIR_angular
-      - pwd
-      - ls -al
-      # Move to React folder
-      - cd $CODEBUILD_SRC_DIR
-      - ls -al
-      - npm run build
-      - ls -al
-      - mv build todo
-      - ls -al todo
+      - docker build -t react-app . > /dev/null 2>&1
+      - docker tag todo-react-app:latest 615299762705.dkr.ecr.ap-south-1.amazonaws.com/react-app:latest > /dev/null 2>&1
+  post_build:
+    commands:
+      - docker push 615299762705.dkr.ecr.ap-south-1.amazonaws.com/react-app:latest > /dev/null 2>&1
 
-      # Build angular app      
-    # - cd $CODEBUILD_SRC_DIR_angular
-    # - ls -al
-    # - ng build --prod --output-path dist
-    # - mkdir -p $CODEBUILD_SRC_DIR/angular
-    # - mv dist/* $CODEBUILD_SRC_DIR/angular
-    # - ls -al $CODEBUILD_SRC_DIR/angular
-      
 artifacts:
   files:
-    - todo/**/*
-    - angular/**/*
     - appspec.yml
-    - scripts/**/*
-  #  - .env
+    - scripts/deploy.sh
