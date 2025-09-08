@@ -1,8 +1,12 @@
 #!/bin/bash
 set -e
 
+REGION="ap-south-1"
+ACCOUNT_ID="615299762705"
 CONTAINER_NAME="react-app"
-IMAGE_URI="615299762705.dkr.ecr.ap-south-1.amazonaws.com/react-app:latest"
+IMAGE_URI="${ACCOUNT_ID}.dkr.ecr.${REGION}.amazonaws.com/react-app:latest"
+
+aws ecr get-login-password --region ${REGION} | docker login --username AWS --password-stdin ${ACCOUNT_ID}.dkr.ecr.${REGION}.amazonaws.com
 
 # Stop old container
 if [ "$(docker ps -q -f name=$CONTAINER_NAME)" ]; then
