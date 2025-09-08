@@ -9,14 +9,14 @@ phases:
   pre_build:
     commands:
       - echo "Logging into ECR..."
-      - echo $ECR_PASSWORD | docker login -u $ECR_USERNAME --password-stdin 615299762705.dkr.ecr.ap-south-1.amazonaws.com > /dev/null 2>&1
+      - echo $ECR_PASSWORD | docker login -u $ECR_USERNAME --password-stdin 615299762705.dkr.ecr.ap-south-1.amazonaws.com
   build:
     commands:
-      - docker build -t react-app . > /dev/null 2>&1
-      - docker tag todo-react-app:latest 615299762705.dkr.ecr.ap-south-1.amazonaws.com/react-app:latest > /dev/null 2>&1
+      - docker build -t react-app .
+      - docker tag todo-react-app:latest 615299762705.dkr.ecr.ap-south-1.amazonaws.com/react-app:latest
   post_build:
     commands:
-      - docker push 615299762705.dkr.ecr.ap-south-1.amazonaws.com/react-app:latest > /dev/null 2>&1
+      - docker push 615299762705.dkr.ecr.ap-south-1.amazonaws.com/react-app:latest
 
 artifacts:
   files:
