@@ -13,7 +13,7 @@ phases:
   build:
     commands:
       - docker build -t react-app .
-      - docker tag todo-react-app:latest 615299762705.dkr.ecr.ap-south-1.amazonaws.com/react-app:latest
+      - docker tag react-app:latest 615299762705.dkr.ecr.ap-south-1.amazonaws.com/react-app:latest
   post_build:
     commands:
       - docker push 615299762705.dkr.ecr.ap-south-1.amazonaws.com/react-app:latest
