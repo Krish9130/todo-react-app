@@ -1,4 +1,4 @@
-FROM public.ecr.aws/library/node:18-slim AS build
+FROM node:18-slim AS build
 
 WORKDIR /opt/
 
