@@ -9,16 +9,13 @@ phases:
     commands:
       - echo "Extracting ECR credentials..."
       - ECR_USERNAME=$ECR_SECRET_username
-      - ECR_PASSWORD=$ECR_SECRET_password
+      #- ECR_PASSWORD=$ECR_SECRET_password
       - ACCOUNT_ID=$ECR_SECRET_account_id
       - REGION=$ECR_SECRET_region
-      #- ECR_USERNAME=$(echo $ECR_SECRET | jq -r .username)
-      #- ECR_PASSWORD=$(echo $ECR_SECRET | jq -r .password)
-      #- ACCOUNT_ID=$(echo $ECR_SECRET | jq -r .account_id)
-      #- REGION=$(echo $ECR_SECRET | jq -r .region)
       
       - echo "Logging into ECR..."
-      - echo $ECR_PASSWORD | docker login -u $ECR_USERNAME --password-stdin $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com
+      - aws ecr get-login-password --region $REGION | docker login --username $ECR_USERNAME --password-stdin $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com
+      #- echo $ECR_PASSWORD | docker login -u $ECR_USERNAME --password-stdin $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com
   build:
     commands:
       - docker build -t react-app .
