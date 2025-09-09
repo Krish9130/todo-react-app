@@ -11,7 +11,7 @@ env:
 phases:
   pre_build:
     commands:
-      - echo "Logging into ECR..."
+      - echo "Logging into ECR...$Name"
       - echo $ECR_PASSWORD | docker login -u $ECR_USERNAME --password-stdin $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com
   build:
     commands:
