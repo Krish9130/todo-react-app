@@ -1,10 +1,11 @@
 version: 0.2
 
 env:
+  
   secrets-manager:
     ECR_USERNAME: ecr-credential:username
     ECR_PASSWORD: ecr-credential:password
-    ACCOUNT_ID: ecr-credential:account_id
+    #ACCOUNT_ID: ecr-credential:account_id
     REGION: ecr-credential:region
 
 phases:
