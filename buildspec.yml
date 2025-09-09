@@ -2,21 +2,26 @@ version: 0.2
 
 env:
   secrets-manager:
-    ECR_USERNAME: ecr-credential:username
-    ECR_PASSWORD: ecr-credential:password
-
+    ECR_SECRET: arn:aws:secretsmanager:ap-south-1:615299762705:secret:ecr-credential-LO7imS
+    
 phases:
   pre_build:
     commands:
+      - echo "Extracting ECR credentials..."
+      - ECR_USERNAME=$(echo $ECR_SECRET | jq -r .username)
+      - ECR_PASSWORD=$(echo $ECR_SECRET | jq -r .password)
+      - ACCOUNT_ID=$(echo $ECR_SECRET | jq -r .account_id)
+      - REGION=$(echo $ECR_SECRET | jq -r .region)
+      
       - echo "Logging into ECR..."
-      - echo $ECR_PASSWORD | docker login -u $ECR_USERNAME --password-stdin 615299762705.dkr.ecr.ap-south-1.amazonaws.com
+      - echo $ECR_PASSWORD | docker login -u $ECR_USERNAME --password-stdin $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com
   build:
     commands:
       - docker build -t react-app .
-      - docker tag react-app:latest 615299762705.dkr.ecr.ap-south-1.amazonaws.com/react-app:latest
+      - docker tag react-app:latest $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/react-app:latest
   post_build:
     commands:
-      - docker push 615299762705.dkr.ecr.ap-south-1.amazonaws.com/react-app:latest
+      - docker push $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/react-app:latest
 
 artifacts:
   files:
